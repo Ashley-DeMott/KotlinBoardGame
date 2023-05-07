@@ -18,12 +18,12 @@ Even though the project is incomplete (so far), it proved to be a good base proj
 * [Kotlin](https://kotlinlang.org/docs/)
 * [Android Developers](https://developer.android.com/)
 
-# Future Work
+## Future Work
 
 - Label format only works for up to 9 rows
 - Generate Pickups
--- Spread based on board size
--- Keep certain number on the field
+  - Spread based on board size
+  - Keep certain number on the field
 - Visuals, sprites and animations
 - Better UI
 - End goal for the game
