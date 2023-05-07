@@ -7,7 +7,7 @@ The main program is located in boardGame.kt, while the testCode.kt contains code
 
 Even though the project is incomplete (so far), it proved to be a good base project that allowed me to learn how to create classes, functions, and algorithms in Kotlin. Additional work can be done by using Android Studio to create an Android application version, which would require more learning about the visual libraries and the Android emulator.
 
-[Software Demo Video](http://youtube.link.goes.here](https://youtu.be/d40VdAFCcgA)
+[Software Demo Video](https://youtu.be/d40VdAFCcgA)
 
 ## Development Environment
 
