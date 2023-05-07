@@ -148,6 +148,7 @@ class Game(private val width: Int, private val height: Int) {
 	}
 
 	// Asserts that the given x,y coordinate is within the bounds of the board
+	// TODO: Assert failures should halt program execution/exit
 	private fun assertValidPos(x: Int, y:Int){
 		// Location must be on the board
 		try {
