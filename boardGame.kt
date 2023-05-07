@@ -67,10 +67,9 @@ class Game(private val width: Int, private val height: Int) {
 
 	// Replaces a BoardItem at the specified location, where yPos is row, and xPos is column
 	private fun replaceItem(xPos: Int, yPos: Int, newItem: BoardItem) : Boolean {
-		assertValidPos(xPos, yPos) // Location must be on the board
-
-		// Only replace the item if it isn't permanent (a wall, etc)
-		if (board[yPos][xPos].isMovable())
+		// Location must be on the board,
+		// And can only replace the item if it isn't permanent (a wall, etc)
+		if (assertValidPos(xPos, yPos) && board[yPos][xPos].isMovable())
 		{
 			// Remove the previous item from the board
 			var removed: BoardItem = removeItem(xPos, yPos)
@@ -95,10 +94,9 @@ class Game(private val width: Int, private val height: Int) {
 	// Removes the item at a specified x,y position from the board,
 	// returns the BoardItem that was removed
 	private fun removeItem(xPos: Int, yPos: Int) : BoardItem {
-		assertValidPos(xPos, yPos) // Must be on the board
-
-		// If the item can be overridden,
-		if (board[yPos][xPos].isMovable()) {
+		// If position is on the board
+		// And the item there can be overridden,
+		if (assertValidPos(xPos, yPos) && board[yPos][xPos].isMovable()) {
 			// Remove the item from the board and return what was removed
 
 			// Tell the BoardItem it is no longer on the board
@@ -124,11 +122,8 @@ class Game(private val width: Int, private val height: Int) {
 	// Moves the BoardItem at the specified x,y to a new spot on the board
 	private fun moveItem(xFrom: Int, yFrom: Int, xTo:Int, yTo: Int) : Boolean {
 		// Locations must both be on the board
-		assertValidPos(xFrom, yFrom)
-		assertValidPos(xTo, yTo)
-
 		// BoardItems at both locations need to be movable
-		if (board[yFrom][xFrom].isMovable() && board[yTo][xTo].isMovable()) {
+		if (assertValidPos(xFrom, yFrom) &&	assertValidPos(xTo, yTo) && board[yFrom][xFrom].isMovable() && board[yTo][xTo].isMovable()) {
 			// Take the moving BoardItem and remove it from its previous location on the board
 			val moveItem = removeItem(xFrom, yFrom)
 
@@ -148,8 +143,7 @@ class Game(private val width: Int, private val height: Int) {
 	}
 
 	// Asserts that the given x,y coordinate is within the bounds of the board
-	// TODO: Assert failures should halt program execution/exit
-	private fun assertValidPos(x: Int, y:Int){
+	private fun assertValidPos(x: Int, y:Int) : Boolean{
 		// Location must be on the board
 		try {
 			assert(y >= 0)
@@ -158,7 +152,9 @@ class Game(private val width: Int, private val height: Int) {
 			assert(x < width)
 		} catch (e: AssertionError) {
 			print("Invalid board position")
+			return false // did not pass all verifications
 		}
+		return true // passed all verifications
 	}
 
 	// Displays the Game's UI, including the score
